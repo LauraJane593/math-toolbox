@@ -1,0 +1,55 @@
+---
+title: "广义瑞利商"
+category: "线性代数"
+tags: ["广义瑞利商", "广义特征值", "分式优化", "SINR", "波束赋形"]
+---
+
+# 广义瑞利商（Generalized Rayleigh Quotient）
+
+### 1. 一句话理解
+
+把固定矩阵的两个二次型之比的极值问题，转为特征值问题，直接给出最优向量方向。
+
+### 2. 触发条件
+
+遇到 $x^HAx/(x^HBx)$，特别是接收信干噪比（signal-to-interference-plus-noise ratio, SINR）中信号功率与干扰噪声功率之比。
+
+### 3. 适用条件
+
+- $A,B\in\mathbb C^{n\times n}$ 固定，$A=A^H$，$B=B^H\succ0$；$A$ 无需半正定。
+- $x\in\mathbb C^n\setminus\{0\}$，因此 $x^HBx>0$。
+- 极值在所有非零向量上取；可等价施加 $x^HBx=1$。额外的单位模、逐天线限制等约束通常使下述极值公式不再直接适用。
+- 若 $B$ 仅半正定或不定，不能直接套用，也不能无条件以伪逆替代逆矩阵。
+
+### 4. 核心结论
+
+令 $B^{-1/2}$ 为 $B$ 的正定 Hermitian 平方根的逆，$C=B^{-1/2}AB^{-1/2}$。则
+
+$$
+\min_{x\ne0}\frac{x^HAx}{x^HBx}=\lambda_{\min}(C),\qquad
+\max_{x\ne0}\frac{x^HAx}{x^HBx}=\lambda_{\max}(C).
+$$
+
+若 $Cu=\lambda_{\max}(C)u$、$u\ne0$，则 $x_\star=B^{-1/2}u$ 为最大化解，满足广义特征值方程（generalized eigenvalue equation）：
+
+$$
+Ax_\star=\lambda_{\max}(C)Bx_\star.
+$$
+
+非零缩放不改变比值。数值上可用 $B=LL^H$，对 Hermitian 矩阵 $L^{-1}AL^{-H}$ 求特征向量 $v$，再解 $L^Hx=v$；其中 $L^{-H}=(L^H)^{-1}$，逆作用通过三角方程计算。
+
+### 5. 在无线通信中的应用
+
+设期望信号信道 $h\in\mathbb C^n\setminus\{0\}$、信号功率 $p>0$，干扰噪声协方差 $R=R_i+\sigma^2 I_n$，其中 $R_i\succeq0$、$\sigma^2>0$。对无额外方向约束的接收波束 $w\ne0$，
+
+$$
+\max_{w\ne0}\frac{p|w^Hh|^2}{w^HRw}=p\,h^HR^{-1}h,
+\qquad w_\star=cR^{-1}h,\quad c\in\mathbb C\setminus\{0\}.
+$$
+
+### 6. 相关工具
+
+- [Hermitian 矩阵](hermitian-matrix.md)：保证实特征值与二次型。
+- [正定矩阵与半正定矩阵](positive-definite-semidefinite-matrices.md)：检查分母。
+- [Cholesky 分解](cholesky-decomposition.md)：稳定计算正定逆作用。
+- [半正定松弛](../optimization-methods/semidefinite-relaxation.md)：含额外非凸二次约束时可考虑的另一条建模路径。

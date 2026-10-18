@@ -1,0 +1,57 @@
+---
+title: "正定矩阵与半正定矩阵"
+category: "线性代数"
+tags: ["正定", "半正定", "二次型", "Gram 矩阵", "协方差", "正则化"]
+---
+
+# 正定矩阵与半正定矩阵（Positive Definite and Positive Semidefinite Matrices）
+
+### 1. 一句话理解
+
+用二次型（quadratic form）判断一个矩阵是否表示非负能量，以及是否在每个非零方向都严格为正。
+
+### 2. 触发条件
+
+遇到 $A\succeq0$、$A\succ0$、$x^HAx$，或需要判断协方差、Gram 矩阵（Gram matrix）能否求逆时。
+
+### 3. 适用条件
+
+- 本库正定性均针对 $A\in\mathbb C^{n\times n}$、$A=A^H$，$n\ge1$；实数情形要求对称。
+- $x\in\mathbb C^n$；不将矩阵序关系理解为逐元素大小关系。
+
+### 4. 核心结论
+
+$$
+\begin{aligned}
+A\succeq0
+&\iff x^HAx\ge0\quad\text{对所有 }x
+\iff \lambda_i(A)\ge0\quad\text{对所有 }i,\\
+A\succ0
+&\iff x^HAx>0\quad\text{对所有 }x\ne0
+\iff \lambda_i(A)>0\quad\text{对所有 }i.
+\end{aligned}
+$$
+
+正定矩阵可逆且 $A^{-1}\succ0$；半正定矩阵可能奇异。在已知 $A\succeq0$ 的前提下，可逆与正定等价。单独“可逆”“对角元为正”或“行列式为正”均不足以保证正定。
+
+若 $H\in\mathbb C^{m\times n}$，则
+
+$$
+H^HH\succeq0,\qquad
+H^HH\succ0\iff\operatorname{rank}(H)=n.
+$$
+
+后一条件要求 $m\ge n$。若 $A\succeq0$、$\alpha>0$，则 $A+\alpha I_n\succ0$。
+
+### 5. 在无线通信中的应用
+
+令 $H\in\mathbb C^{m\times n}$ 为导频观测矩阵。即使导频不足或列相关导致 $H^HH$ 奇异，正则化（regularization）系数 $\alpha>0$ 仍保证 $H^HH+\alpha I_n$ 正定，使正则化信道估计的线性方程具有唯一解。
+
+### 6. 相关工具
+
+- [Hermitian 矩阵](hermitian-matrix.md)：正定性的矩阵结构前提。
+- [Cholesky 分解](cholesky-decomposition.md)：正定方程的高效求解。
+- [广义瑞利商](generalized-rayleigh-quotient.md)：正定分母保证比值处处有定义。
+- [凸集](../convex-analysis/convex-set.md)：半正定锥是凸集。
+- [凸函数与凹函数](../convex-analysis/convex-concave-functions.md)：正定性与曲率判定。
+- [半正定松弛](../optimization-methods/semidefinite-relaxation.md)：以半正定约束代替向量外积结构的一部分。

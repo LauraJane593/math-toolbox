@@ -1,0 +1,54 @@
+---
+title: "Hermitian 矩阵"
+category: "线性代数"
+tags: ["Hermitian", "共轭转置", "特征值", "协方差", "MIMO"]
+---
+
+# Hermitian 矩阵（Hermitian Matrix）
+
+### 1. 一句话理解
+
+Hermitian 矩阵是复数域中实对称矩阵的对应物，保证二次型（quadratic form）为实数，且能用正交的特征方向分析。
+
+### 2. 触发条件
+
+遇到 $H^HH$、$hh^H$、协方差矩阵（covariance matrix），或需要分析 $x^HAx$ 与特征值（eigenvalue）时。
+
+### 3. 适用条件
+
+- $A\in\mathbb C^{n\times n}$ 为方阵，$n\ge1$，满足 $A=A^H$，其中 $A^H=\overline A^T$。
+- 二次型中的 $x\in\mathbb C^n$。实数情形中，条件退化为 $A=A^T$。
+
+### 4. 核心结论
+
+Hermitian 的充要条件为 $a_{ij}=\overline{a_{ji}}$；对角元均为实数。谱定理（spectral theorem）给出：
+
+$$
+A=U\Lambda U^H,\qquad U^HU=UU^H=I_n,\qquad
+\Lambda=\operatorname{diag}(\lambda_1,\ldots,\lambda_n),\quad \lambda_i\in\mathbb R.
+$$
+
+这里 $U$ 为酉矩阵（unitary matrix）。因此，对任意 $x\in\mathbb C^n$，
+
+$$
+x^HAx\in\mathbb R,\qquad
+\lambda_{\min}(A)\|x\|_2^2\le x^HAx\le\lambda_{\max}(A)\|x\|_2^2.
+$$
+
+Hermitian **不保证半正定或可逆**；例如 $\operatorname{diag}(1,-1,0)$。
+
+### 5. 在无线通信中的应用
+
+若发射向量 $s\in\mathbb C^n$ 有有限二阶矩，令 $\mu=\mathbb E[s]$，则其协方差
+
+$$
+R_s=\mathbb E[(s-\mu)(s-\mu)^H]
+$$
+
+为 Hermitian 半正定矩阵。若 $\mu=0$，接收波束 $w\in\mathbb C^n$ 对应的平均输出功率是 $\mathbb E[|w^Hs|^2]=w^HR_sw$。非零均值时需用二阶矩 $\mathbb E[ss^H]$ 计算总功率。
+
+### 6. 相关工具
+
+- [正定矩阵与半正定矩阵](positive-definite-semidefinite-matrices.md)：判断二次型非负与矩阵可逆性。
+- [广义瑞利商](generalized-rayleigh-quotient.md)：由特征方向求二次型比值极值。
+- [半正定松弛](../optimization-methods/semidefinite-relaxation.md)：将波束向量提升为 Hermitian 矩阵变量。

@@ -1,0 +1,52 @@
+---
+title: "凸集"
+category: "凸分析"
+tags: ["凸集", "可行域", "半正定锥", "单位模", "RIS"]
+---
+
+# 凸集（Convex Set）
+
+### 1. 一句话理解
+
+集合中任意两点之间的整条线段仍在集合内，便称为凸集；它是判断约束能否构成凸优化模型的第一步。
+
+### 2. 触发条件
+
+需要判断功率约束、仿射等式（affine equality）、半正定约束或 RIS 单位模约束的可行域是否凸时。
+
+### 3. 适用条件
+
+集合 $\mathcal C$ 位于实向量空间；复向量用实部和虚部组成的实向量表示，Hermitian 矩阵也按实向量空间处理。凸组合（convex combination）的系数 $\theta$ 必须为实数且在 $[0,1]$ 内。
+
+### 4. 核心结论
+
+定义为以下充要条件：
+
+$$
+\mathcal C\text{ 为凸集}\iff
+\theta x+(1-\theta)y\in\mathcal C,
+\quad\forall x,y\in\mathcal C,\ \forall\theta\in[0,1].
+$$
+
+凸集的任意交集仍凸；凸集的仿射像及仿射逆像仍凸。典型凸集包括：
+
+$$
+\begin{gathered}
+\{x\in\mathbb R^n:Ax=b\},\quad A\in\mathbb R^{m\times n},\ b\in\mathbb R^m,\\
+\{w\in\mathbb C^n:\|w\|_2^2\le P\},\quad P\ge0,\\
+\mathbb H_+^n=\{X\in\mathbb C^{n\times n}:X=X^H,\ X\succeq0\}.
+\end{gathered}
+$$
+
+最后一个集合称为半正定锥（positive semidefinite cone）。空集按定义也为凸集；凸性不保证非空、有界或闭。
+
+### 5. 在无线通信中的应用
+
+总发射功率约束 $\|w\|_2^2\le P$ 是凸约束；理想 RIS 的 $|v_i|=1$ 则不是：$v_i=1$ 和 $v_i=-1$ 的中点 $0$ 不可行。把等式改成 $|v_i|\le1$ 得到凸松弛（convex relaxation），但所得解可能无法直接满足原单位模约束。
+
+### 6. 相关工具
+
+- [凸函数与凹函数](convex-concave-functions.md)：通过函数构造凸的次水平集。
+- [凸优化问题](../optimization-methods/convex-optimization-problem.md)：可行域与目标需共同检查。
+- [正定矩阵与半正定矩阵](../linear-algebra/positive-definite-semidefinite-matrices.md)：半正定约束的含义。
+- [半正定松弛](../optimization-methods/semidefinite-relaxation.md)：RIS 二次模型的另一种松弛。

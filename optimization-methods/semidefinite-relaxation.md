@@ -1,0 +1,70 @@
+---
+title: "半正定松弛（SDR）"
+category: "优化方法"
+tags: ["SDR", "SDP", "QCQP", "秩一约束", "RIS", "波束赋形", "非凸优化"]
+---
+
+# 半正定松弛（Semidefinite Relaxation, SDR）
+
+### 1. 一句话理解
+
+把向量外积提升为矩阵变量，再删除非凸的秩限制，得到半正定规划（semidefinite program, SDP）；可给出原问题的界，但不总能直接得到可行波束。
+
+### 2. 触发条件
+
+出现二次约束二次规划（quadratically constrained quadratic program, QCQP）、$w^HQ_iw$、$W=ww^H$、单位模或秩一约束时。
+
+### 3. 适用条件
+
+- 以下先考虑齐次二次模型：$w\in\mathbb C^n$，固定 $Q_i=Q_i^H\in\mathbb C^{n\times n}$，$b_i\in\mathbb R$，$i=1,\ldots,m$。$Q_i$ 无需半正定。
+- 目标与约束须能用提升变量表示为线性函数；删除秩限制后剩余约束也须凸，才能得到凸松弛。
+- 有线性项时，需用 $z=[w^T,1]^T$ 增广，并在提升矩阵中保留末对角元为 $1$ 等相应约束，不能直接丢掉线性项。
+
+### 4. 核心结论
+
+原问题为
+
+$$
+p_\star=\inf_{w\in\mathbb C^n}
+\left\{w^HQ_0w:\ w^HQ_iw\le b_i,\ i=1,\ldots,m\right\}.
+$$
+
+令 $W=ww^H$，则 $w^HQ_iw=\operatorname{tr}(Q_iW)$。向量外积的充要描述为
+
+$$
+W=ww^H\text{ 对某个 }w
+\iff W=W^H\succeq0,\quad\operatorname{rank}(W)\le1.
+$$
+
+这里允许 $w=0$，因此用秩不超过 $1$；原约束排除零向量时才可写秩恰为 $1$。去掉秩限制得到
+
+$$
+\begin{aligned}
+p_{\mathrm{SDR}}=\inf_{W=W^H}\quad &\operatorname{tr}(Q_0W)\\
+\text{满足}\quad &\operatorname{tr}(Q_iW)\le b_i,\quad i=1,\ldots,m,\\
+&W\succeq0.
+\end{aligned}
+$$
+
+所有原可行解都能提升为松弛可行解，所以最小化时 $p_{\mathrm{SDR}}\le p_\star$；最大化时方向相反，松弛给上界。最优值用下确界表示，不预设可达。
+
+若松弛有最优解 $W_\star=\lambda uu^H$，其中 $\lambda>0$、$\|u\|_2=1$，则 $w_\star=\sqrt\lambda\,u$ 是原问题全局最优解；若 $W_\star=0$，则恢复为 $w_\star=0$。高秩解通常需近似恢复并检查原约束，不能声称松弛必然精确。
+
+### 5. 在无线通信中的应用
+
+理想连续相位 RIS 中，$v\in\mathbb C^N$、$|v_i|=1$，固定 $Q=Q^H$，考虑最大化反射信号的二次目标 $v^HQv$。提升 $V=vv^H$ 后得到
+
+$$
+\max_{V=V^H}\ \operatorname{tr}(QV)
+\quad\text{满足}\quad V\succeq0,\quad V_{ii}=1,\ i=1,\ldots,N,
+$$
+
+其中已删除秩一约束。若解为高秩，可做高斯随机化（Gaussian randomization）：采样 $z\sim\mathcal{CN}(0,V_\star)$，取 $v_i=e^{\mathrm j\arg z_i}$（$z_i=0$ 时任选相位），按原目标择优。对本例该投影满足单位模；有其他约束时仍需逐一检查，不保证找到可行解或全局最优解。
+
+### 6. 相关工具
+
+- [Hermitian 矩阵](../linear-algebra/hermitian-matrix.md)：提升变量与实二次目标。
+- [正定矩阵与半正定矩阵](../linear-algebra/positive-definite-semidefinite-matrices.md)：理解外积和半正定约束。
+- [凸集](../convex-analysis/convex-set.md)：半正定锥凸，秩限制通常非凸。
+- [凸优化问题](convex-optimization-problem.md)：松弛后 SDP 的凸性。
+- [广义瑞利商](../linear-algebra/generalized-rayleigh-quotient.md)：无额外非凸约束的二次型比值可先考虑直接特征值解法。
