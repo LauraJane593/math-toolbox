@@ -18,7 +18,7 @@ math-toolbox/
 ├── AGENTS.md                 后续维护规范
 ├── index.md                  三种检索入口
 ├── templates/math-tool.md    新笔记模板
-├── linear-algebra/           Hermitian、正定性、Cholesky、广义瑞利商
+├── linear-algebra/           厄米矩阵、正定性、Cholesky分解、广义瑞利商
 ├── matrix-calculus/          矩阵微积分（待扩充）
 ├── convex-analysis/          凸集、凸函数与凹函数
 ├── optimization-methods/     凸优化问题、半正定松弛
@@ -27,6 +27,14 @@ math-toolbox/
 ```
 
 空分类中的 `.gitkeep` 仅用于让 Git 保留目录，加入首篇笔记时可移除。
+
+## 中文命名与英文检索
+
+数学笔记以中文数学术语命名，保留 `Cholesky分解`、`Gram矩阵` 等惯用中英混合写法；一级标题同时给出英文术语。英文术语、同义词和常见缩写记录在 YAML `aliases` 列表中，不再重复填写 `title`。目录、管理文件和模板名称保持不变。
+
+例如，[厄米矩阵](linear-algebra/厄米矩阵.md) 的英文别名包括 `Hermitian Matrix` 和 `Self-adjoint Matrix`。在 Obsidian 中可按中文文件名定位，也可在全库搜索中输入英文术语，或在输入内部链接时使用英文别名查找笔记；按标签检索可使用 `tag:二次型`。标签内部不得包含空格，英文别名中的空格正常保留。
+
+详细的命名、属性、链接及验收规则统一维护在 [AGENTS.md](AGENTS.md#命名属性与链接规范)，新笔记从 [模板](templates/math-tool.md) 开始。
 
 ## 记号与阅读约定
 
@@ -47,9 +55,20 @@ math-toolbox/
 
 后续维护遵循 [AGENTS.md](AGENTS.md)：先检索，再更新或新增，同时维护索引与相关链接。新文件以 [模板](templates/math-tool.md) 为起点。
 
-## 本地版本管理
+维护修改时同步检查本说明与 [维护规范](AGENTS.md)，详细规则以维护规范为准。
 
-在本目录使用 `git status` 查看状态。修改完成后，可用 `git add .` 和 `git commit -m "描述本次知识更新"` 保存版本；用 `git log --oneline` 查看历史。若尚未设置提交身份，先在本仓库配置自己的 `user.name` 和 `user.email`。仓库只保存在本地，不配置远程仓库。
+## 版本管理与 GitHub 同步
+
+GitHub 仓库：[LauraJane593/math-toolbox](https://github.com/LauraJane593/math-toolbox.git)，远程名称为 `origin`，分支为 `main`。
+
+提交人使用 `LauraJane593`，邮箱使用 GitHub 隐私邮箱；仅在当前仓库配置：
+
+```sh
+git config --local user.name "LauraJane593"
+git config --local user.email "341774811+LauraJane593@users.noreply.github.com"
+```
+
+在本目录使用 `git status` 查看状态。修改完成后，检查差异，用 `git add <本次修改的文件>` 暂存相关文件，再用 `git commit -m "描述本次知识更新"` 保存版本；用 `git log --oneline` 查看历史，用 `git push` 同步到 GitHub。
 
 ## 核查参考资料
 

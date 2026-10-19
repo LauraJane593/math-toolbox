@@ -1,10 +1,17 @@
 ---
-title: "Cholesky 分解"
-category: "线性代数"
-tags: ["Cholesky", "正定", "矩阵求逆", "线性方程", "信道估计"]
+aliases:
+- Cholesky Decomposition
+- Cholesky Factorization
+category: 线性代数
+tags:
+- Cholesky
+- 正定
+- 矩阵求逆
+- 线性方程
+- 信道估计
 ---
 
-# Cholesky 分解（Cholesky Decomposition）
+# Cholesky分解（Cholesky Decomposition）
 
 ### 1. 一句话理解
 
@@ -51,6 +58,6 @@ $$
 
 ### 6. 相关工具
 
-- [正定矩阵与半正定矩阵](positive-definite-semidefinite-matrices.md)：确认分解条件。
-- [广义瑞利商](generalized-rayleigh-quotient.md)：将正定分母变换为普通瑞利商。
-- [凸优化问题](../optimization-methods/convex-optimization-problem.md)：上述严格凸最小二乘的优化背景。
+- [正定矩阵与半正定矩阵](正定矩阵与半正定矩阵.md)：确认分解条件。
+- [广义瑞利商](广义瑞利商.md)：将正定分母变换为普通瑞利商。
+- [凸优化问题](../optimization-methods/凸优化问题.md)：上述严格凸最小二乘的优化背景。
