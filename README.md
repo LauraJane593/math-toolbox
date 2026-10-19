@@ -18,21 +18,21 @@ math-toolbox/
 ├── AGENTS.md                 后续维护规范
 ├── index.md                  三种检索入口
 ├── templates/math-tool.md    新笔记模板
-├── linear-algebra/           厄米矩阵、正定性、Cholesky分解、广义瑞利商
-├── matrix-calculus/          矩阵微积分（待扩充）
-├── convex-analysis/          凸集、凸函数与凹函数
-├── optimization-methods/     凸优化问题、半正定松弛
-├── probability-statistics/   概率统计（待扩充）
-└── information-theory/       信息论（待扩充）
+├── 线性代数/                 厄米矩阵、正定性、Cholesky分解、广义瑞利商
+├── 矩阵微积分/               待扩充
+├── 凸分析/                   凸集、凸函数与凹函数
+├── 最优化方法/               凸优化问题、半正定松弛
+├── 概率论与数理统计/         待扩充
+└── 信息论/                   待扩充
 ```
 
 空分类中的 `.gitkeep` 仅用于让 Git 保留目录，加入首篇笔记时可移除。
 
 ## 中文命名与英文检索
 
-数学笔记以中文数学术语命名，保留 `Cholesky分解`、`Gram矩阵` 等惯用中英混合写法；一级标题同时给出英文术语。英文术语、同义词和常见缩写记录在 YAML `aliases` 列表中，不再重复填写 `title`。目录、管理文件和模板名称保持不变。
+知识目录采用中文学科名称，笔记以中文数学术语命名，保留 `Cholesky分解`、`Gram矩阵` 等惯用中英混合写法；一级标题同时给出英文术语。英文术语、同义词和常见缩写记录在 YAML `aliases` 列表中，不再重复填写 `title`。`.obsidian`、`.github`、`templates` 等工程目录以及管理文件和模板保留原名称，知识分类层级保持不变。
 
-例如，[厄米矩阵](linear-algebra/厄米矩阵.md) 的英文别名包括 `Hermitian Matrix` 和 `Self-adjoint Matrix`。在 Obsidian 中可按中文文件名定位，也可在全库搜索中输入英文术语，或在输入内部链接时使用英文别名查找笔记；按标签检索可使用 `tag:二次型`。标签内部不得包含空格，英文别名中的空格正常保留。
+例如，[厄米矩阵](线性代数/厄米矩阵.md) 的英文别名包括 `Hermitian Matrix` 和 `Self-adjoint Matrix`。在 Obsidian 中可按中文文件名定位，也可在全库搜索中输入英文术语，或在输入内部链接时使用英文别名查找笔记；按标签检索可使用 `tag:二次型`。标签内部不得包含空格，英文别名中的空格正常保留。
 
 详细的命名、属性、链接及验收规则统一维护在 [AGENTS.md](AGENTS.md#命名属性与链接规范)，新笔记从 [模板](templates/math-tool.md) 开始。
 
